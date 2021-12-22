@@ -1,13 +1,217 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+}
+.App {
+     min-width: 500px;
+     margin: 0px auto;
+     height: 100vh;
+     overflow-y: scroll;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Form */
+
+.form {
+     display: flex;
+     margin: 5px auto;
+     height: 60px;
+}
+.form input {
+     flex: 8;
+     border-radius: 5px;
+     text-align: center;
+     font-size: 1.1em;
+}
+.form button {
+     width: 70px;
+     margin-left: 5px;
+     border-radius: 5px;
+     background-color: black;
+     color: white;
+     font-size: 18px;
+     cursor: pointer;
+}
+.form button:hover {
+     background-color: lightgoldenrodyellow;
+     color: black;
+}
+/* Filter Buttons */
+
+.filter-buttons {
+     display: flex;
+     justify-content: space-between;
+     margin-top: 30px;
+}
+.filter-buttons button {
+     padding: 10px;
+     background-color: coral;
+     color: white;
+     border: 0px;
+     font-size: 18px;
+     cursor: pointer;
+     width: 33%;
+}
+.filter-buttons button.active {
+     background-color: black;
+}
+
+/* List */
+
+.tasks-report {
+     font-size: 1.3em;
+     margin-top: 30px;
+     margin-left: 20px;
+}
+.list {
+     list-style-type: none;
+     margin-top: 10px;
+}
+.item {
+     margin: 5px;
+     background-color: lightgoldenrodyellow;
+     padding: 10px;
+     font-size: 1.3em;
+     min-height: 60px;
+     display: flex;
+     width: 100%;
+}
+.item-content {
+     flex: 8;
+     display: flex;
+     align-items: center;
+     position: relative;
+}
+.item-content input[type='checkbox'] {
+     cursor: pointer;
+     appearance: none;
+     position: relative;
+     min-width: 20px;
+     height: 20px;
+     border: 1px solid black;
+     border-radius: 5px;
+     color: green;
+}
+.item-content input[type='checkbox']::before {
+     content: '\2713';
+     position: absolute;
+     right: 1px;
+     top: -0.3em;
+     visibility: hidden;
+     font-size: 1.5em;
+     font-weight: bold;
+}
+.item-content input[type='checkbox']:checked::before {
+     visibility: visible;
+}
+.item-content p {
+     width: 100%;
+     overflow-wrap: break-word;
+     word-break: break-all;
+     display: flex;
+     margin-left: 10px;
+}
+.item-buttons {
+     width: 200px;
+     display: flex;
+     justify-content: space-evenly;
+}
+
+.item input[type='checkbox'] {
+     margin-right: 10px;
+}
+.delete-button,
+.edit-button,
+.save-button,
+.cancel-button {
+     border: 0px;
+     background-color: coral;
+     color: white;
+     font-size: 16px;
+     padding: 5px;
+     margin-left: 10px;
+     cursor: pointer;
+     width: 40%;
+     height: 40px;
+}
+.delete-button:hover,
+.edit-button:hover,
+.save-button:hover,
+.cancel-button:hover {
+     background-color: black;
+}
+/* Edit Template */
+
+.item input[type='text'] {
+     width: 100%;
+     height: 100%;
+     padding: 10px;
+}
+
+/* modal */
+
+.modal {
+     position: fixed;
+     top: 0px;
+     left: 0px;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     z-index: 1;
+}
+.modal-content {
+     margin: 20% auto;
+     width: 60%;
+     background-color: white;
+     box-shadow: 2px 2px 2px black;
+     animation: modal-pop-up;
+     animation-duration: 0.5s;
+}
+.modal-header {
+     background-color: coral;
+     color: white;
+     padding: 15px;
+     height: 50px;
+     position: relative;
+}
+.close-button {
+     border: 0;
+     font-size: 30px;
+     background-color: coral;
+     color: #ccc;
+     cursor: pointer;
+     position: absolute;
+     top: 5px;
+     right: 10px;
+}
+.close-button:hover {
+     color: black;
+}
+.modal-body {
+     padding: 15px;
+     text-align: center;
+}
+.yes-button,
+.no-button {
+     border: 0px;
+     background-color: coral;
+     color: white;
+     margin: 10px 5px;
+     padding: 10px;
+     cursor: pointer;
+}
+.yes-button:hover,
+.no-button:hover {
+     background-color: black;
+}
+
+@keyframes modal-pop-up {
+     from {
+          opacity: 0;
+          transform: scale(0.7);
+     }
+     to {
+          opacity: 1;
+          transform: scale(1);
+     }
 }

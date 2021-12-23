@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Modal from './Modal';
+import EditingTemplate from './EditingTemplate';
+import ViewingTemplate from './ViewingTemplate';
 
 const Item = ({
      itemName,
@@ -12,83 +13,34 @@ const Item = ({
      setEditValue,
 }) => {
      const [isEditing, setIsEditing] = useState(false);
-     const [modalIsOpen, setModelIsOpen] = useState(false);
-     const viewingTemplate = (
-          <>
-               {modalIsOpen && (
-                    <Modal
-                         setModalIsOpen={setModelIsOpen}
-                         itemId={itemId}
-                         deleteItem={deleteItem}
-                    />
-               )}
-               <div className="item-content">
-                    <input
-                         type="checkbox"
-                         id={itemId}
-                         checked={completed}
-                         onChange={() => checkItem(itemId)}
-                    ></input>
-                    <p>{itemName}</p>
-               </div>
-               <div className="item-buttons">
-                    <button
-                         className="edit-button"
-                         onClick={() => {
-                              setIsEditing(true);
-                         }}
-                    >
-                         Edit
-                    </button>
-                    <button
-                         className="delete-button"
-                         onClick={() => {
-                              setModelIsOpen(true);
-                         }}
-                    >
-                         Delete
-                    </button>
-               </div>
-          </>
-     );
-     const editingTemplate = (
-          <>
-               <div className="item-content">
-                    <input
-                         type="text"
-                         value={editValue}
-                         onChange={(e) => setEditValue(e.target.value)}
-                    />
-               </div>
-               <div className="item-buttons">
-                    <button
-                         className="cancel-button"
-                         onClick={() => {
-                              setIsEditing(false);
-                              setEditValue('');
-                         }}
-                    >
-                         Cancel
-                    </button>
-                    <button
-                         className="save-button"
-                         onClick={async () => {
-                              setIsEditing(false);
-                              handleEdit(itemId);
-                              setEditValue('');
-                         }}
-                    >
-                         Save
-                    </button>
-               </div>
-          </>
-     );
+     const [modalIsOpen, setModalIsOpen] = useState(false);
+
      return (
           <li
                className="item"
                style={completed ? { backgroundColor: 'greenyellow' } : null}
           >
-               {isEditing ? editingTemplate : viewingTemplate}
+               {isEditing ? (
+                    <EditingTemplate
+                         itemId={itemId}
+                         isEditing={isEditing}
+                         setIsEditing={setIsEditing}
+                         handleEdit={handleEdit}
+                         editValue={editValue}
+                         setEditValue={setEditValue}
+                    />
+               ) : (
+                    <ViewingTemplate
+                         itemId={itemId}
+                         deleteItem={deleteItem}
+                         setModalIsOpen={setModalIsOpen}
+                         completed={completed}
+                         setIsEditing={setIsEditing}
+                         modalIsOpen={modalIsOpen}
+                         checkItem={checkItem}
+                         itemName={itemName}
+                    />
+               )}
           </li>
      );
 };

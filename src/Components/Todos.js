@@ -26,7 +26,8 @@ const Todos = ({
      return (
           <div>
                <p className="tasks-report">
-                    you have {displayedItems.length} tasks.
+                    you have {displayedItems.length}{' '}
+                    {displayedItems.length === 1 ? 'task' : 'tasks'}
                </p>
                <ul className="list">{renderedItems}</ul>
           </div>

@@ -36,12 +36,24 @@
      background-color: lightgoldenrodyellow;
      color: black;
 }
+/* Search */
+
+.search {
+     display: block;
+     width: 100%;
+     height: 50px;
+     border: 1px solid black;
+     border-radius: 10px;
+     text-align: center;
+     font-size: 1em;
+     margin: 10px 0px;
+}
 /* Filter Buttons */
 
 .filter-buttons {
      display: flex;
      justify-content: space-between;
-     margin-top: 30px;
+     margin-top: 10px;
 }
 .filter-buttons button {
      padding: 10px;

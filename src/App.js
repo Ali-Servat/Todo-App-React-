@@ -1,3 +1,4 @@
+import Search from './Components/Search';
 import Form from './Components/Form';
 import Todos from './Components/Todos';
 import { useState, useEffect } from 'react';
@@ -9,6 +10,7 @@ function App() {
      const [newItem, setNewItem] = useState('');
      const [filterType, setFilterType] = useState('All');
      const [editValue, setEditValue] = useState('');
+     const [searchValue, setSearchValue] = useState('');
 
      const API_URL = 'http://localhost:3500/tasks';
      const FILTER_MAP = {
@@ -83,8 +85,6 @@ function App() {
           const result = apiRequest(requestURL, deleteOptions);
      };
 
-     const displayedItems = items.filter(FILTER_MAP[filterType]);
-
      const handleEdit = (id) => {
           const updatedItems = items.map((item) =>
                item.id === id ? { ...item, name: editValue } : item
@@ -102,6 +102,16 @@ function App() {
           const result = apiRequest(requestURL, updateOptions);
      };
 
+     const search = (e) => {
+          const value = e.target.value;
+          setSearchValue(value);
+     };
+
+     const displayedItems = items
+          .filter((item) =>
+               item.name.toLowerCase().includes(searchValue.toLowerCase())
+          )
+          .filter(FILTER_MAP[filterType]);
      return (
           <div className="App">
                <Form
@@ -109,6 +119,7 @@ function App() {
                     setNewItem={setNewItem}
                     addItem={addItem}
                />
+               <Search searchValue={searchValue} search={search} />
                <FilterButtons
                     FILTER_NAMES={FILTER_NAMES}
                     setFilterType={setFilterType}
